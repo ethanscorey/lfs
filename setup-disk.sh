@@ -24,3 +24,5 @@ v
 w
 q
 EOF
+mkfs.ext4 "$(LFS_DISK)p3"
+mkswap "$(LFS_DISK)p2"
