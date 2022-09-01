@@ -11,7 +11,7 @@ apk add \
     findutils \
     gawk \
     gcc \
-    g++
+    g++ \
     grep \
     gzip \
     grep \
