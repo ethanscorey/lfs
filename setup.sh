@@ -4,15 +4,24 @@ export LFS_TGT=x86_64-lfs-linux-gnu
 export LFS_DISK=$1
 export LFS_USER_PW=$2
 
+source install-development-packages.sh
+
+if [ "$LFS_DISK" == "" ]; then
+    echo "Must provide value for LFS_DISK"
+    exit 1
+fi
+
 # If disks aren't formatted and mounted, then set up and mount disks
+if ! [ -e $(echo $LFS_DISK)p3 ]; then
+    source setup-disk.sh "$LFS_DISK"
+fi
 if ! grep -q "$LFS" /proc/mounts; then
-	source setup-disk.sh "$LFS_DISK"
-	mount "$(LFS_DISK)p3" "$LFS"
-	/sbin/swapon "$(LFS_DISK)p2"
+	mount "$(echo $LFS_DISK)p3" "$LFS"
+	/sbin/swapon "$(echo $LFS_DISK)p2"
 fi
 
 # Download package sources and patches
-mkdir -v $LFS/sources
+mkdir -pv $LFS/sources
 chmod -v a+wt $LFS/sources
 if ! [ -e ./wget-list ]; then
 	wget https://www.linuxfromscratch.org/lfs/view/stable/wget-list
@@ -28,7 +37,7 @@ fi
 # Create directories for build
 mkdir -pv $LFS/{etc,var} $LFS/usr/{bin,lib,sbin}
 for i in bin lib sbin; do
-	ln -sv usr/$i $LFS/$i
+	ln -svf usr/$i $LFS/$i
 done
 if echo $LFS_TGT | grep -qs '64'; then
 	mkdir -pv $LFS/lib64

@@ -8,6 +8,7 @@ apk add \
     bison \
     coreutils \
     diffutils \
+    e2fsprogs \
     findutils \
     gawk \
     gcc \
