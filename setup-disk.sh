@@ -1,5 +1,5 @@
 LFS_DISK=$1
-fdisk $LFS_DISK << EOF
+sudo fdisk $LFS_DISK << EOF
 o
 n
 p
@@ -23,5 +23,5 @@ v
 w
 q
 EOF
-mkfs.ext4 "$(LFS_DISK)p3"
-mkswap "$(LFS_DISK)p2"
+sudo mkfs.ext4 "$(LFS_DISK)p3"
+sudo mkswap "$(LFS_DISK)p2"

@@ -8,7 +8,7 @@ if ! [ -e packages.csv ]; then
 fi
 cp -f packages.csv $SOURCE_DIR
 cp -f md5sums $SOURCE_DIR
-cd $SOURCE_DIR
+pushd $SOURCE_DIR
 cat packages.csv | while read line; do
    NAME="`echo $line | cut -d\, -f1`"
    URL="`echo $line | cut -d\, -f2`"
@@ -34,3 +34,4 @@ if md5sum -c md5sums >/dev/null; then
         fi
     done
 fi
+popd

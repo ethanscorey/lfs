@@ -1,5 +1,5 @@
 #!/bin/bash
-export LFS=/mnt/LFS
+export LFS=/mnt/lfs
 export LFS_TGT=x86_64-lfs-linux-gnu
 export LFS_DISK=$1
 
@@ -15,13 +15,15 @@ if ! [ -e $(echo $LFS_DISK)p3 ]; then
     source setup-disk.sh "$LFS_DISK"
 fi
 if ! grep -q "$LFS" /proc/mounts; then
-	mount "$(echo $LFS_DISK)p3" "$LFS"
-	/sbin/swapon "$(echo $LFS_DISK)p2"
+    sudo mkdir -pv $LFS
+	sudo mount -v -t ext4 "$(echo $LFS_DISK)p3" "$LFS"
+	sudo /sbin/swapon "$(echo $LFS_DISK)p2"
 fi
-if ! [ -e $(echo $LFS_DISK)p3 ]; then
+if ! grep -q "$LFS" /proc/mounts; then
     echo "$LFS_DISK failed to mount."
     exit 1
 fi
+sudo chown lfs:lfs $LFS
 
 # Download package sources and patches
 mkdir -pv $LFS/sources
