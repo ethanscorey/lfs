@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 cd findutils-4.9.0
 ./configure \
 	--prefix=/usr \
@@ -6,3 +8,4 @@ cd findutils-4.9.0
 	--build=$(build-aux/config.guess)
 make
 make DESTDIR=$LFS install
+popd

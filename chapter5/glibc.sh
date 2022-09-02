@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 case $(uname -m) in
 	i?86) ln -sfv ld-linux.so.2 $LFS/lib/ld-lsb.so.3
 	;;
@@ -20,3 +22,5 @@ make
 make DESTDIR=$LFS install
 # Fix hardcoded path to the executable loader in ldd script
 sed '/RTLDLIST=/s@/usr@@g' -i $LFS/usr/bin/ldd
+$LFS/tools/libexec/gcc/$LFS_TGT/12.2.0/install-tools/mkheaders
+popd

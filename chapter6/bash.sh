@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 ./configure \
 	--prefix=/usr \
 	--build=$(support/config.guess) \
@@ -6,3 +8,4 @@
 make
 make DESTDIR=$LFS install
 ln -sv bash $LFS/bin/sh
+popd

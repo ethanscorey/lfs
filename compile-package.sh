@@ -2,7 +2,8 @@ CHAPTER=$1
 PACKAGE=$2
 
 cat $LFS/sources/packages.csv \
-    | grep -i "$PACKAGE" \
+    | cut -d\, -f1 \
+    | grep -i "^$PACKAGE" \
     | grep -i -v "\.patch," \
     | while read line; do
 
@@ -11,7 +12,7 @@ cat $LFS/sources/packages.csv \
     if ! [ -e "$DIRNAME" ]; then
         echo "Extracting $TARNAME"
         mkdir -pv "$DIRNAME"
-        tar -xvf "$TARNAME" -C "$DIRNAME"
+        tar -xf "$TARNAME" -C "$DIRNAME"
         pushd "$DIRNAME"
         if [ "$(ls -lA | grep "^[d-]" | wc -l)" == "1" ]; then
             echo "Unpacking"
@@ -21,14 +22,11 @@ cat $LFS/sources/packages.csv \
     fi
     echo "Compiling $PACKAGE"
     sleep 5
-    pushd "$DIRNAME"
-        mkdir -pv "./logs/chapter$CHAPTER"
-        if ! source "./chapter$CHAPTER/$PACKAGE.sh" 2>&1 | tee "./logs/chapter$CHAPTER/$PACKAGE.log"; then
-            echo "Compiling $PACKAGE FAILED."
-            popd
-            exit 1
-        fi
-    popd
+    mkdir -pv "./logs/chapter$CHAPTER"
+    if ! source "./chapter$CHAPTER/$PACKAGE.sh" $DIRNAME 2>&1 | tee "./logs/chapter$CHAPTER/$PACKAGE.log"; then
+        echo "Compiling $PACKAGE FAILED."
+        exit 1
+    fi
     echo "Done compiling $PACKAGE"
     rm -rf $DIRNAME
 done

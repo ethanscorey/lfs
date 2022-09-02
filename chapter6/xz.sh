@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 ./configure \
 	--prefix=/usr \
 	--host=$LFS_TGT \
@@ -6,3 +8,4 @@
 	--docdir=/usr/share/doc/xz-5.2.5
 make
 make DESTDIR=$LFS install
+popd

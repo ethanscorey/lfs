@@ -1,4 +1,4 @@
-echo 'int main(){}' > dummy.c
-$LFS_TGT-gcc dummy.c
+echo 'int main(){}' | gcc -xc -
 readelf -l a.out | grep '/ld-linux'
-$LFS/tools/libexec/gcc/$LFS_TGT/11.2.0/install-tools/mkheaders
+rm a.out
+#$LFS/tools/libexec/gcc/$LFS_TGT/11.2.0/install-tools/mkheaders

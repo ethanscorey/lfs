@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 mkdir -pv mpfr
 mkdir -pv mpc
 mkdir -pv gmp
@@ -34,3 +36,4 @@ make install
 cd ..
 cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
 	`dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/install-tools/include/limits.h
+popd

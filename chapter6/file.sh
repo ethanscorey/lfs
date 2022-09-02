@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 mkdir build
 pushd build
 	../configure \
@@ -10,3 +12,4 @@ popd
 ./configure --prefix=/usr --host=$LFS_TGT --build=$(./config.guess)
 make FILE_COMPILE=$(pwd)/build/src/file
 make DESTDIR=$LFS install
+popd

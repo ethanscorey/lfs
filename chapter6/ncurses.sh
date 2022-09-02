@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 sed -i s/mawk// configure
 mkdir build
 pushd build
@@ -20,3 +22,4 @@ popd
 make
 make DESTDIR=$LFS TIC_PATH=$(pwd)/build/progs/tic install
 echo "INPUT(-lncursesw)" > $LFS/usr/lib/libncurses.so
+popd

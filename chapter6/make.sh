@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 ./configure \
 	--prefix=/usr \
 	--without-guile \
@@ -5,3 +7,4 @@
 	--build=$(build-aux/config.guess)
 make
 make DESTDIR=$LFS install
+popd

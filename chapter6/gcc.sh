@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 mkdir -pv mpfr
 mkdir -pv mpc
 mkdir -pv gmp
@@ -31,3 +33,4 @@ ln -s ../../../libgcc/gthr-posix.h $LFS_TGT/libgcc/gthr-default.h
 make
 make DESTDIR=$LFS install
 ln -sv gcc $LFS/usr/bin/cc
+popd

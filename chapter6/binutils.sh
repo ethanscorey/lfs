@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 sed '6009s/$add_dir//' -i ltmain.sh
 mkdir -v build
 cd build
@@ -11,3 +13,4 @@ cd build
 	--enable-64-bit-bfd
 make
 make DESTDIR=$LFS install
+popd
