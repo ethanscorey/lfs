@@ -2,7 +2,6 @@
 export LFS=/mnt/LFS
 export LFS_TGT=x86_64-lfs-linux-gnu
 export LFS_DISK=$1
-export LFS_USER_PW=$2
 
 source install-development-packages.sh
 
@@ -38,19 +37,3 @@ case $(uname -m) in
     x86_64) mkdir -pv $LFS/lib64 ;;
 esac
 mkdir -pv $LFS/tools
-
-# Add the LFS user if it doesn't exist and give ownership of files
-if ! grep -q lfs /etc/passwd; then
-	addgroup lfs
-	adduser -s /bin/bash -G lfs -h /home/lfs -k /dev/null lfs
-	passwd lfs << EOF
-$LFS_USER_PW
-$LFS_USER_PW
-EOF
-chown -v lfs $LFS/{usr{,/*},lib,var,etc,bin,sbin,tools,sources}
-case $(uname -m) in
-    x86_64) chown -v lfs $LFS/lib64 ;;
-esac
-fi
-source /lfs/setup-env.sh $LFS_DISK $LFS_USER_PW
-su - lfs
