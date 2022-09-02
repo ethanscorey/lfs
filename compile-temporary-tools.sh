@@ -16,5 +16,5 @@ for package in \
     xz \
     binutils \
     gcc; do
-    source /lfs/compile-package.sh 6 $package
+    source ./compile-package.sh 6 $package
 done

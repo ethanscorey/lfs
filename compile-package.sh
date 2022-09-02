@@ -22,8 +22,8 @@ cat $LFS/sources/packages.csv \
     echo "Compiling $PACKAGE"
     sleep 5
     pushd "$DIRNAME"
-        mkdir -pv "/home/lfs/logs/chapter$CHAPTER"
-        if ! source "/lfs/chapter$CHAPTER/$PACKAGE.sh" 2>&1 | tee "/home/lfs/logs/chapter$CHAPTER/$PACKAGE.log"; then
+        mkdir -pv "./logs/chapter$CHAPTER"
+        if ! source "./chapter$CHAPTER/$PACKAGE.sh" 2>&1 | tee "./logs/chapter$CHAPTER/$PACKAGE.log"; then
             echo "Compiling $PACKAGE FAILED."
             popd
             exit 1
