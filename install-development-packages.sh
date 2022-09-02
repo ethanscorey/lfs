@@ -1,32 +1,33 @@
 #!/bin/sh
-sed -e 's/^# *//' /etc/apk/repositories -i
-apk update
-apk upgrade
-apk add \
+sudo sed "/jammy main restricted/a deb http:\/\/archive.ubuntu.com\/ubuntu\/ jammy universe" -i /etc/apt/sources.list
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y \
     bash \
     binutils \
     bison \
+    build-essential \
     coreutils \
     diffutils \
     e2fsprogs \
     findutils \
     gawk \
-    gcc \
-    g++ \
+    info \
+    install-info \
+    make \
+    manpages-dev \
     grep \
     gzip \
-    grep \
     m4 \
-    make \
     patch \
     perl \
     python3 \
     sed \
     tar \
     texinfo \
-    xz
-ln -svf bash /bin/sh
-apk add github-cli vim
+    xz-utils
+sudo ln -svf bash /bin/sh
+sudo apt install -y github-cli vim
 cat > ~/.vimrc << EOF
 filetype plugin indent on
 inoremap jk <ESC>
