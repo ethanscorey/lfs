@@ -52,4 +52,5 @@ case $(uname -m) in
     x86_64) chown -v lfs $LFS/lib64 ;;
 esac
 fi
-#su - lfs
+source /lfs/setup-env.sh $LFS_DISK $LFS_USER_PW
+su - lfs
