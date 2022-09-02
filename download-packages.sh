@@ -34,4 +34,6 @@ if md5sum -c md5sums >/dev/null; then
         fi
     done
 fi
+# Copy the gcc archive so that libstdc++ can find it
+cp gcc-12.2.0.tar.xz libstdc++-12.2.0.tar.xz
 popd

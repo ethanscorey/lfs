@@ -3,7 +3,7 @@ PACKAGE=$2
 
 cat $LFS/sources/packages.csv \
     | cut -d\, -f1 \
-    | grep -i "^$PACKAGE" \
+    | grep -i "^$PACKAGE.*tar" \
     | grep -i -v "\.patch," \
     | while read line; do
 
