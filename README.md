@@ -19,10 +19,10 @@ Because I'm building on a bootable USB, every time I power off the computer, I h
 At this point, you should be logged in as the `lfs` user (confirm that you see `lfs` in your bash prompt), and the target system should be mounted. You can confirm this by runnnning `fdisk -l`. You should also confirm that `$LFS` and `$LFS_TGT` have been set to the correct values by running `echo $LFS $LFS_TGT`. 
 
 ## Building the Cross-Compilation Toolchain
-TKTK
+Run `/lfs/compile-cross-toolchain.sh` as the user `lfs`. To confirm that this script worked, run `/lfs/chapter5/sanity-check.sh`. The output should be `[Requesting program interpreter: /lib64/ld-linux-x86-64.s0.2]`.
 
 ## Building the System
-TKTK
+Run `/lfs/compile-temporary-tools.sh` as the user `lfs`.
 
 ## Building in Stages
-LFS is meant to be built in one session, but if you have to reboot the system, make sure to follow steps 4-8 from above.
+LFS is meant to be built in one session, but if you have to reboot the system, make sure to follow steps 4-8 from above. If you have already compiled packages and don't want to recompile them, you can comment out the relevant installation script by running `sed -e "s/^/#/" <chapternumber>/<package>.sh`.

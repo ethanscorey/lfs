@@ -9,19 +9,18 @@ if echo $LFS_TGT | grep -qs '64'; then
 fi
 mkdir -v build
 cd build
+mkdir -pv $LFS_TGT/libgcc
+ln -s ../../../libgcc/gthr-posix.h $LFS_TGT/libgcc/gthr-default.h
 ../configure \
-	--target=$LFS_TGT \
-	--prefix=$LFS/tools \
-	--with-glibc-version=2.35 \
-	--with-sysroot=$LFS \
-	--with-newlib \
-	--without-headers \
+	--build=$(../config.guess) \
+	--host=$LFS_TGT \
+	--prefix=/usr \
+	CC_FOR_TARGET=$LFS_TGT-gcc \
+	--with-build-sysroot=$LFS \
 	--enable-initfini-array \
 	--disable-nls \
-	--disable-shared \
 	--disable-multilib \
 	--disable-decimal-float \
-	--disable-threads \
 	--disable-libatomic \
 	--disable-libgomp \
 	--disable-libquadmath \
@@ -30,7 +29,5 @@ cd build
 	--disable-libstdcxx \
 	--enable-languages=c,c++
 make
-make install
-cd ..
-cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
-	`dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/install-tools/include/limits.h
+make DESTDIR=$LFS install
+ln -sv gcc $LFS/usr/bin/cc
