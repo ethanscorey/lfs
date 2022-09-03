@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 mkdir -v build
 cd build
 ../libstdc++-v3/configure \
@@ -10,3 +12,4 @@ cd build
 	--with-gxx-include-dir=/tools/$LFS_TGT/include/c++/11.2.0
 make
 make DESTDIR=$LFS install
+popd

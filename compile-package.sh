@@ -1,7 +1,9 @@
 CHAPTER=$1
 PACKAGE=$2
 
-cat $LFS/sources/packages.csv \
+# Hard code file for libstdc++
+echo "libstdc++-12.2.0.tar.xz" | \
+    cat - $LFS/sources/packages.csv \
     | cut -d\, -f1 \
     | grep -i "^$PACKAGE.*tar" \
     | grep -i -v "\.patch," \

@@ -1,6 +1,5 @@
 DIRNAME=$1
 pushd $DIRNAME
-cd findutils-4.9.0
 ./configure \
 	--prefix=/usr \
 	--localstatedir=/var/lib/locate \

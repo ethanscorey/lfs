@@ -5,7 +5,8 @@ pushd $DIRNAME
 	--host=$LFS_TGT \
 	--build=$(build-aux/config.guess) \
 	--disable-static \
-	--docdir=/usr/share/doc/xz-5.2.5
+	--docdir=/usr/share/doc/$DIRNAME
 make
 make DESTDIR=$LFS install
+rm -v $LFS/usr/lib/liblzma.la
 popd
