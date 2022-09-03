@@ -14,6 +14,7 @@ popd
 	--mandir=/usr/share/man \
 	--with-manpage-format=normal \
 	--with-shared \
+    --with-cxx-shared \
 	--without-debug \
 	--without-ada \
 	--without-normal \

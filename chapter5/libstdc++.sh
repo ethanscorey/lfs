@@ -1,5 +1,6 @@
 DIRNAME=$1
 pushd $DIRNAME
+VERSION=$(python3 -c "print('$DIRNAME'.split('-')[1])")
 mkdir -v build
 cd build
 ../libstdc++-v3/configure \
@@ -9,7 +10,7 @@ cd build
 	--disable-multilib \
 	--disable-nls \
 	--disable-libstdcxx-pch \
-	--with-gxx-include-dir=/tools/$LFS_TGT/include/c++/11.2.0
+	--with-gxx-include-dir=/tools/$LFS_TGT/include/c++/$VERSION
 make
 make DESTDIR=$LFS install
 popd
