@@ -13,4 +13,5 @@ cd build
 	--with-gxx-include-dir=/tools/$LFS_TGT/include/c++/$VERSION
 make
 make DESTDIR=$LFS install
+rm -v $LFS/usr/lib/lib{stdc++,stdc++fs,supc++}.la
 popd

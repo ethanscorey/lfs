@@ -15,6 +15,7 @@ sudo apt install -y \
     e2fsprogs \
     findutils \
     gawk \
+    help2man \
     info \
     install-info \
     make \
