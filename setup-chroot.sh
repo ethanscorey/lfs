@@ -32,11 +32,11 @@ chmod ugo+x inside-chroot.sh
 chmod ugo+x inside-chroot2.sh
 mkdir -pv $LFS/sources/lfs
 cp -rf . $LFS/sources/lfs
-for script in "inside-chroot.sh" "inside-chroot2.sh"; do
+for script in "lfs/inside-chroot.sh" "lfs/inside-chroot2.sh"; do
     chroot "$LFS" /usr/bin/env -i \
         HOME=/root \
         TERM="$TERM" \
         PS1='(lfs chroot) \u:\w$ ' \
         PATH=/usr/bin:/usr/sbin \
-        /bin/bash --login +h -c /sources/$script
+        /bin/bash --login +h -c "/sources/$script"
 done
