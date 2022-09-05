@@ -18,10 +18,14 @@ mount -vt tmpfs tmps $LFS/run
 if [ -h $LFS/dev/shm ]; then
 	mkdir -pv $LFS/$(readlink $LFS/dev/shm)
 fi
-cp . $LFS/sources/lfs
-chroot "$LFS" /usr/bin/env -i \
-    HOME=/root \
-    TERM="$TERM" \
-    PS1='(lfs chroot) \u:\w$ ' \
-    PATH=/usr/bin:/usr/sbin \
-    /bin/bash --login
+chmod ugo+x inside-chroot.sh
+chmod ugo+x inside-chroot2.sh
+mkdir -pv $LFS/sources/lfs
+cp -rf . $LFS/sources/lfs
+for script in "inside-chroot.sh" "inside-chroot2.sh"; do
+    chroot "$LFS" /usr/bin/env -i \
+        HOME=/root \
+        TERM="$TERM" \
+        PS1='(lfs chroot) \u:\w$ ' \
+        PATH=/usr/bin:/usr/sbin \
+        /bin/bash --login +h -c /sources/$script
