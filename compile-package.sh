@@ -18,7 +18,7 @@ echo "libstdc++-12.2.0.tar.xz" | \
         pushd "$DIRNAME"
         if [ "$(ls -lA | grep "^[d-]" | wc -l)" == "1" ]; then
             echo "Unpacking"
-            mv $(ls -A)/* ./
+            (shopt -s dotglob; mv $(ls -A)/* ./)
         fi
         popd
     fi
