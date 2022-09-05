@@ -1,7 +1,7 @@
 #!/bin/bash
 # Set up the chroot environment
 export LFS=$1
-if [ "$LFS" == ""]; then
+if [ "$LFS" == "" ]; then
     echo "LFS is not defined."
     exit 1
 fi
