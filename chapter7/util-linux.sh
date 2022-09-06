@@ -2,7 +2,7 @@ DIRNAME=$1
 pushd $DIRNAME
 VERSION=$(echo $DIRNAME | cut -d"-" -f3)
 ./configure \
-    ADJTIME_PATH=/var/lib/hwclock/adjtime |
+    ADJTIME_PATH=/var/lib/hwclock/adjtime \
     --libdir=/usr/lib \
     --docdir=/usr/share/doc/util-linux-$VERSION \
     --disable-chfn-chsh \
