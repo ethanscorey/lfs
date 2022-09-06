@@ -5,8 +5,8 @@ PACKAGE=$2
 echo "libstdc++-12.2.0.tar.xz" | \
     cat - $LFS/sources/packages.csv \
     | cut -d\, -f1 \
-    | grep -i "^$PACKAGE.*tar" \
-    | grep -i -v "\.patch," \
+    | grep "^$PACKAGE.*tar" \
+    | grep -v "\.patch," \
     | while read line; do
 
     TARNAME="$LFS/sources/`echo $line | cut -d\, -f1`"
