@@ -30,4 +30,4 @@ q
 EOF
 sudo mkfs.ext4 "$(echo $LFS_DISK)p3"
 sudo mkfs.ext4 "$(echo $LFS_DISK)p4"
-sudo mkswap "$(echo $FS_DISK)p2"
+sudo mkswap "$(echo $LFS_DISK)p2"
