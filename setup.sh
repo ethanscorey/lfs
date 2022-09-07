@@ -16,14 +16,16 @@ if ! [ -e $(echo $LFS_DISK)p3 ]; then
 fi
 if ! grep -q "$LFS" /proc/mounts; then
     sudo mkdir -pv $LFS
-	sudo mount -v -t ext4 "$(echo $LFS_DISK)p3" "$LFS"
-	sudo /sbin/swapon "$(echo $LFS_DISK)p2"
+    sudo mount -v -t ext4 "$(echo $LFS_DISK)p3" "$LFS"
+    sudo mkdir -pv $LFS/home
+    sudo mount -v -t ext4 "$(echo $LFS_DISK)p4" "$LFS/home"
+    sudo /sbin/swapon "$(echo $LFS_DISK)p2"
 fi
 if ! grep -q "$LFS" /proc/mounts; then
     echo "$LFS_DISK failed to mount."
     exit 1
 fi
-sudo chown lfs:lfs $LFS
+sudo chown -R lfs:lfs $LFS
 
 # Download package sources and patches
 mkdir -pv $LFS/sources
