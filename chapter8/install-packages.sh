@@ -9,7 +9,19 @@ for package in \
     xz \
     zstd \
     file \
-    readline; do
+    readline \
+    bc \
+    flex \
+    tcl \
+    expect \
+    dejagnu \
+    binutils \
+    gmp \
+    mpfr \
+    mpc \
+    attr \
+    acl \
+    ; do
     source /sources/lfs/compile-package.sh 8 $package
 done
 popd
