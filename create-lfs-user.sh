@@ -4,7 +4,7 @@ export LFS=/mnt/lfs
 export LFS_TGT=x86_64-lfs-linux-gnu
 
 if ! [ $USER == $LFS_USER ]; then
-    if ! grep -q $LFS_USER /etc/passwd;then
+    if ! grep -q $LFS_USER /etc/passwd; then
         sudo useradd -s /bin/bash -d /home/$LFS_USER -k /dev/null -mU $LFS_USER
         sudo passwd -d $LFS_USER
         sudo usermod -aG sudo $LFS_USER
