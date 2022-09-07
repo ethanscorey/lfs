@@ -1,21 +1,26 @@
 LFS_DISK=$1
 sudo fdisk $LFS_DISK << EOF
-o
+g
 n
-p
 1
 
-+100M
-a
++512M
+t
+1
 1
 n
-p
 2
 
 +8G
+t
+2
+19
 n
-p
 3
+
++30G
+n
+4
 
 
 p
@@ -24,4 +29,5 @@ w
 q
 EOF
 sudo mkfs.ext4 "$(LFS_DISK)p3"
+sudo mkfs.ext4 "$(LFS_DISK)p4"
 sudo mkswap "$(LFS_DISK)p2"

@@ -16,3 +16,4 @@ for package in \
     util-linux; do
     source /sources/lfs/compile-package.sh 7 $package
 done
+exit

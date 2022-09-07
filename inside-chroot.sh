@@ -66,3 +66,4 @@ EOF
 echo "tester:x:101:101::/home/tester:/bin/bash" >> /etc/passwd
 echo "tester:x:101:" >> /etc/group
 install -o tester -d /home/tester
+exit

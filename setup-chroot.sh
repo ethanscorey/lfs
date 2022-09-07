@@ -30,6 +30,7 @@ if [ -h $LFS/dev/shm ]; then
 fi
 chmod ugo+x inside-chroot.sh
 chmod ugo+x inside-chroot2.sh
+chmod ugo+x inside-chroot3.sh
 mkdir -pv $LFS/sources/lfs
 cp -rf . $LFS/sources/lfs
 for script in \
@@ -43,3 +44,4 @@ for script in \
         PATH=/usr/bin:/usr/sbin \
         /bin/bash --login +h -c "/sources/$script"
 done
+chown -R lfs:lfs $LFS/{usr,lib,var,etc,bin,sbin,tools}
