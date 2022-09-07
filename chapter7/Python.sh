@@ -1,7 +1,7 @@
 DIRNAME=$1
 pushd $DIRNAME
 ./configure --prefix=/usr \
-    --enabled-shared \
+    --enable-shared \
     --without-ensurepip
 
 make

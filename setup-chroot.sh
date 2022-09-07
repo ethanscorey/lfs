@@ -44,4 +44,7 @@ for script in \
         PATH=/usr/bin:/usr/sbin \
         /bin/bash --login +h -c "/sources/$script"
 done
-chown -R lfs:lfs $LFS/{usr,lib,var,etc,bin,sbin,tools}
+chown -R lfs:lfs $LFS/{usr,lib,var,etc,bin,sbin}
+case $(uname -m) in
+	x86_64) chown -R lfs:lfs $LFS/lib64 ;;
+esac
