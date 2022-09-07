@@ -28,6 +28,6 @@ v
 w
 q
 EOF
-sudo mkfs.ext4 "$(LFS_DISK)p3"
-sudo mkfs.ext4 "$(LFS_DISK)p4"
-sudo mkswap "$(LFS_DISK)p2"
+sudo mkfs.ext4 "$(echo $LFS_DISK)p3"
+sudo mkfs.ext4 "$(echo $LFS_DISK)p4"
+sudo mkswap "$(echo $FS_DISK)p2"

@@ -12,7 +12,7 @@ fi
 
 # If disks aren't formatted and mounted, then set up and mount disks
 if ! [ -e $(echo $LFS_DISK)p3 ]; then
-    source setup-disk.sh "$LFS_DISK"
+    source setup-disk.sh $LFS_DISK
 fi
 if ! grep -q "$LFS" /proc/mounts; then
     sudo mkdir -pv $LFS
