@@ -1,1 +1,1 @@
-echo "Installing Iana-etc"
+cp services protocols /etc

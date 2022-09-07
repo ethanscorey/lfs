@@ -1,1 +1,1 @@
-echo "Installing man pages"
+make prefix=/usr install
