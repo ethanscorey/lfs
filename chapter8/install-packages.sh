@@ -21,6 +21,28 @@ for package in \
     mpc \
     attr \
     acl \
+    libcap \
+    shadow \
+    gcc; do
+    source /sources/lfs/compile-package.sh 8 $package
+done
+if ! bash /sources/lfs/chapter8/sanity-check.sh; then
+    echo "Failed sanity check"
+    exit 1
+fi
+for package in \
+    pkg-config \
+    ncurses \
+    sed \
+    psmisc \
+    gettext \
+    bison \
+    grep \
+    bash \
+    libtool \
+    gdbm \
+    gperf \
+    expat \
     ; do
     source /sources/lfs/compile-package.sh 8 $package
 done
