@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 ./configure \
     --prefix=/usr \
     --with-tcl=/usr/lib \
@@ -8,3 +10,4 @@ make
 make test
 make install
 ln -svf expect$VERSION/libexpect$VERSION.so /usr/lib
+popd

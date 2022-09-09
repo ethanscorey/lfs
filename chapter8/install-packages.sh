@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 #!/bin/bash
 pushd /sources/lfs
 for package in \
@@ -83,4 +85,5 @@ for package in \
     sysvinit; do
     source /sources/lfs/compile-package.sh 8 $package
 done
+popd
 popd

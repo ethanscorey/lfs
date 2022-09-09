@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 VERSION=$(echo $DIRNAME | cut -d"-" -f2)
 MAJOR_MINOR=$(python -c "print('$VERSION'[:-2])")
 export BUILD_ZLIB=False
@@ -21,3 +23,4 @@ make
 make test
 make install
 unset BUILD_ZLIB BUILD_BZIP2
+popd

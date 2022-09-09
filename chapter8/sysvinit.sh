@@ -1,8 +1,7 @@
 DIRNAME=$1
 pushd $DIRNAME
 VERSION=$(echo $DIRNAME | cut -d"-" -f2)
-./configure --prefix=/usr --docdir=/usr/share/doc/gperf-$VERSION
+patch -Np1 -i ../sysvinit-$VERSION-consolidated-1.patch
 make
-make -j1 check
 make install
 popd

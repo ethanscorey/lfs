@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 VERSION=$(echo $DIRNAME | cut -d"-" -f2)
 ./configre \
     --prefix=/usr \
@@ -6,3 +8,4 @@ VERSION=$(echo $DIRNAME | cut -d"-" -f2)
 make
 make check
 make install
+popd

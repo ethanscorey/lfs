@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 VERSION=$(echo $DIRNAME | cut -d"-" -f2)
 ./configure \
     --prefix=/usr \
@@ -34,3 +36,4 @@ make distclean
     --with-abi-version=5
 make sources libs
 cp -av lib/lib*.so.5* /usr/lib
+popd

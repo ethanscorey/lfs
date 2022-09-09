@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 export NINJAJOBS=4
 sed -i '/int Guess/a \
     int j = 0;\
@@ -11,3 +13,4 @@ python3 configure.py --bootstrap
 install -vm755 ninja /usr/bin
 instal -vDm644 misc/bash-completion /usr/share/bash-completion/completions/ninja
 install -vDm644 misc/zsh-completion /usr/share/zsh/site-functions/_ninja
+popd

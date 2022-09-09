@@ -1,10 +1,10 @@
 DIRNAME=$1
 pushd $DIRNAME
 VERSION=$(echo $DIRNAME | cut -d"-" -f2)
-sed -i 's:\\\${:\\\$\\{:' intltool-update.in
+FORCE_UNSAFE_CONFIGURE=1  \
 ./configure --prefix=/usr
 make
 make check
 make install
-install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-$VERSION/I18N-HOWTO
+make -C doc install-html docdir=/usr/share/doc/tar-$VERSION
 popd

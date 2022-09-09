@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 VERSION=$(echo $DIRNAME | cut -d"-" -f2)
 patch -Np1 -i ../bzip2-$VERSION-install_docs-1.patch
 sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
@@ -12,3 +14,4 @@ for i in /usr/bin/{bzcat,bunzip2}; do
     ln -sfv bzip2 $i
 done
 rm -fv /usr/lib/libbz2.a
+popd

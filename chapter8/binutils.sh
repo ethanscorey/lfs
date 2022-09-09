@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 expect -c "spawn ls"
 mkdir -v build
 cd build
@@ -15,3 +17,4 @@ make tooldir=/usr
 make -k check
 make tooldir=/usr install
 rm -fv /usr/lib/lib{bfd,ctf,ctf-nobfd,opcodes}.a
+popd

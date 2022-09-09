@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 ./configure \
     --prefix=/usr \
     --disable-static \
@@ -5,3 +7,4 @@
 make
 make check
 make install
+popd

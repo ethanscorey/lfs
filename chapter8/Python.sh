@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 VERSION=$(echo $DIRNAME | cut -d"-" -f2)
 ./configure \
     --prefix=/usr \
@@ -18,3 +20,4 @@ tar --strip-components=1 \
     --no-same-permissions \
     -C /usr/share/doc/python-$VERSION/html \
     -xvf ../python-$VERSION-docs-html.tar.bz
+popd

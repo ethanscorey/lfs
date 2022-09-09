@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 echo 'int main(){}' > dummy.c
 cc dummy.c -v -Wl,--verbose &> dummy.log
 READELF_OUTPUT=$(readelf -l a.out | grep ': /lib')
@@ -47,3 +49,4 @@ fi
 rm -v dummy.c a.out dummy.log
 mkdir -pv /usr/share/gdb/auto-load/usr/lib
 mv -v /usr/lib/*gdb.py /usr/share/gdb/auto-load/usr/lib
+popd

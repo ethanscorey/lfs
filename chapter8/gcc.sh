@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 VERSION=$(echo $DIRNAME | cut -d"-" -f2)
 case $(uname -m) in
     x86_64)
@@ -25,3 +27,4 @@ chown -v -R root:root \
 ln -svr /usr/bin/cpp /usr/lib
 ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/$VERSION/liblto_plugin.so \
     /usr/lib/bfd-plugins/
+popd

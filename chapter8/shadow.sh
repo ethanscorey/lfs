@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 sed -i 's/groups$(EXEEXT) //' src/Makefile.in
 find man -name Makefile.in -exec sed -i 's/groups\.1 / /' {} \;
 find man -name Makefile.in -exec sed -i 's/getspnam\.3 / /' {} \;
@@ -18,3 +20,4 @@ pwconv
 grpconv
 mkdir -pv /etc/default
 useradd -D --gid 999
+popd

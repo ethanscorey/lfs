@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 VERSION=$(echo $DIRNAME | cut -d"-" -f2)
 patch -Np1 -i ../glibc-$VERSION-fhs-1.patch
 mkdir -v build
@@ -66,3 +68,4 @@ include /etc/ld.so.conf.d/*.conf
 
 EOF
 mkdir -pv /etc/ld.so.conf.d
+popd

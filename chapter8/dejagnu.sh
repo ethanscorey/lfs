@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 VERSION = $(echo $DIRNAME | cut -d"-" -f2)
 mkdir -v build
 cd build
@@ -8,3 +10,4 @@ make install
 install -v -dm755 /usr/share/doc/dejagnu-$VERSION
 install -v m644 doc/dejagnu.{html,txt} /usr/share/dic/dejagnu-$VERSION
 make check
+popd

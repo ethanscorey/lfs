@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 VERSION=$(echo $DIRNAME | cut -d"-" -f2)
 tar -xf ../tcl$VERSION-html.tar.gz --strip-components=1
 SRCDIR=$(pwd)
@@ -27,3 +29,4 @@ ln -sfv tclsh$(echo $VERSION | sed "s/\.[0-9]*$//") /usr/bin/tclsh
 mv /usr/share/man/man3/{Thread,Tcl_Thread}.3
 mkdir -v -p /usr/share/doc/tcl-$VERSION
 cp -v -r ../html/* /usr/share/doc/tcl-$VERSION
+popd

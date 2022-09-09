@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 ./configure \
     --prefix=/usr \
     --bindir=/usr/bin \
@@ -13,3 +15,4 @@ make
 make check
 make install
 mv -v /usr/{,s}bin/ifconfig
+popd

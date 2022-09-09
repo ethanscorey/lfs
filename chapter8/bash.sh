@@ -1,3 +1,5 @@
+DIRNAME=$1
+pushd $DIRNAME
 VERSION=$(echo $DIRNAME | cut -d"-" -f2)
 ./configure \
     --prefix=/usr \
@@ -15,3 +17,4 @@ exit $value
 EOF
 make install
 exec /usr/bin/bash --login
+popd
