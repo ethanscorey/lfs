@@ -43,7 +43,44 @@ for package in \
     gdbm \
     gperf \
     expat \
-    ; do
+    inet-utils \
+    less \
+    perl \
+    XML-Parser \
+    intltool \
+    autoconf \
+    automake \
+    openssl \
+    kmod \
+    elfutils \
+    libffi \
+    Python \
+    wheel \
+    ninja \
+    meson \
+    coreutils \
+    check \
+    diffutils \
+    gawk \
+    findutils \
+    groff \
+    grub \
+    gzip \
+    iproute2 \
+    kbd \
+    libpipeline \
+    make \
+    patch \
+    tar \
+    texinfo \
+    vim \
+    eudev \
+    man-db \
+    procps-ng \
+    util-linux \
+    e2fsprogs \
+    sysklogd \
+    sysvinit; do
     source /sources/lfs/compile-package.sh 8 $package
 done
 popd
