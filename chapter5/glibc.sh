@@ -1,13 +1,14 @@
 DIRNAME=$1
+VERSION=$(echo $DIRNAME | cut -d"-" -f2)
 pushd $DIRNAME
 case $(uname -m) in
-	i?86) ln -sfv ld-linux.so.2 $LFS/lib/ld-lsb.so.3
-	;;
-	x86_64) ln -sfv ../lib/ld-linux-x86-64.so.2 $LFS/lib64
+    i?86)   ln -sfv ld-linux.so.2 $LFS/lib/ld-lsb.so.3
+    ;;
+    x86_64) ln -sfv ../lib/ld-linux-x86-64.so.2 $LFS/lib64
             ln -sfv ../lib/ld-linux-x86-64.so.2 $LFS/lib64/ld-lsb-x86-64.so.3
-	;;
+    ;;
 esac
-patch -Np1 -i ../glibc-*-fhs-1.patch
+patch -Np1 -i ../glibc-$VERSION-fhs-1.patch
 mkdir -v build
 cd build
 echo "rootsbindir=/usr/sbin" > configparms

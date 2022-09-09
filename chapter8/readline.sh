@@ -1,7 +1,7 @@
 DIRNAME=$1
 pushd $DIRNAME
 VERSION=$(echo $DIRNAME | cut -d"-" -f2)
-sed - '/MV.*old/d' Makefile.in
+sed -i '/MV.*old/d' Makefile.in
 sed -i '/{OLDSUFF}/c:' support/shlib-install
 ./configure \
     --prefix=/usr \

@@ -1,6 +1,6 @@
 DIRNAME=$1
 pushd $DIRNAME
-VERSION=$(python3 -c "print('$DIRNAME'.split('-')[1])")
+VERSION=$(echo $DIRNAME | cut -d"-" -f2)
 mkdir -v build
 cd build
 ../libstdc++-v3/configure \

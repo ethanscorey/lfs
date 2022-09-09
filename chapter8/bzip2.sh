@@ -7,6 +7,7 @@ sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
 make -f Makefile-libbz2_so
 make clean
 make
+make PREFIX=/usr install
 cp -av libbz2.so.* /usr/lib
 ln -sv libbz2.so.$VERSION /usr/lib/libbz2.so
 cp -v bzip2-shared /usr/bin/bzip2

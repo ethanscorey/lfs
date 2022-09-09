@@ -23,7 +23,7 @@ sed -e "s|$SRCDIR/unix/pkgs/itcl|/usr/lib/itcl|" \
 unset SRCDIR
 make test
 make install
-chmod -v u+w /usr/lib/libtcl$(echo $VERSION | sed "s/\.[0-9]*$//")
+chmod -v u+w /usr/lib/libtcl$(echo $VERSION | sed "s/\.[0-9]*$//").so
 make install-private-headers
 ln -sfv tclsh$(echo $VERSION | sed "s/\.[0-9]*$//") /usr/bin/tclsh
 mv /usr/share/man/man3/{Thread,Tcl_Thread}.3

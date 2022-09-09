@@ -1,6 +1,6 @@
 DIRNAME=$1
 pushd $DIRNAME
-VERSION=$(echo $DIRNAME | cut -d"-" -f2
+VERSION=$(echo $DIRNAME | cut -d"-" -f2)
 sed -i 's/extras//' Makefile.in
 ./configure --prefix=/usr
 make

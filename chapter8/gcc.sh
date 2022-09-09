@@ -2,10 +2,10 @@ DIRNAME=$1
 pushd $DIRNAME
 VERSION=$(echo $DIRNAME | cut -d"-" -f2)
 case $(uname -m) in
-    x86_64)
-        sed -e '/m64=/s/lib64/lib/' \
-            -i.orig gcc/config/i386/t-linux64
-    ;;
+  x86_64)
+    sed -e '/m64=/s/lib64/lib/' \
+        -i.orig gcc/config/i386/t-linux64
+  ;;
 esac
 mkdir -v build
 cd build
