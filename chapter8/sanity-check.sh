@@ -8,21 +8,21 @@ if ! echo $READELF_OUTPUT | grep "/lib64/ld-linux-x86-64.so.2"; then
     exit 1
 fi
 START_FILES=$(grep -o '/usr.lib/*./crt[1in].*succeeded' dummy.log)
-for $file in "crt1.o" "crti.o" "crtn.o"; do
+for file in "crt1.o" "crti.o" "crtn.o"; do
     if ! echo $START_FILES | grep "/usr/lib/gcc/.*$file succeeded"; then
         echo "$file not found"
         exit 1
     fi 
 done
 INCLUDE_PATH=$(grep -B4 '^ /usr/include' dummy.log)
-for $path in "/usr/lib/gcc/.*/include" "/usr/local/include" "/usr/lib/gcc.*/include-fixed" "/usr/include"; do
+for path in "/usr/lib/gcc/.*/include" "/usr/local/include" "/usr/lib/gcc.*/include-fixed" "/usr/include"; do
     if ! echo $INCLUDE_PATH | grep $path; then
         echo "$path not found"
         exit 1
     fi
 done
 LINKER_PATH=$(grep 'SEARCH.*/usr/lib' dummy.log |sed 's|; |\n|g')
-for $path in \
+for path in \
     "/usr/x86_64.*/lib64" \
     "/usr/local/lib64" \
     "/lib64" \
