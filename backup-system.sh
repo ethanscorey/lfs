@@ -1,12 +1,12 @@
 #!/bin/bash
 if [ "$LFS" == "" ]; then
     echo "LFS not defined"
-    exit i
+    exit 1
 fi
 sudo umount $LFS/dev/pts
 sudo umount $LFS/{sys,proc,run,dev}
 pushd $LFS
-tar -cJpf $HOME/lfs-temp-tools-11.2.tar.xz .
+sudo tar -cJpf $HOME/lfs-temp-tools-11.2.tar.xz .
 popd
 sudo mount -v --bind /dev $LFS/dev
 sudo mount -v --bind /dev/pts $LFS/dev/pts
