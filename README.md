@@ -19,10 +19,12 @@ Because I'm building on a bootable USB, every time I power off the computer, I h
 At this point, you should be logged in as the `lfs` user (confirm that you see `lfs` in your bash prompt), and the target system should be mounted. You can confirm this by runnnning `sudo fdisk -l`. You should also confirm that `$LFS` and `$LFS_TGT` have been set to the correct values by running `echo $LFS $LFS_TGT`. 
 
 ## Building the Cross-Compilation Toolchain
-Run `./compile-cross-toolchain.sh` as the user `lfs`. To confirm that this script worked, run `/lfs/chapter5/sanity-check.sh`. The output should be `[Requesting program interpreter: /lib64/ld-linux-x86-64.s0.2]`.
+First, run `./compile-cross-toolchain.sh` as the user `lfs`. You can check the logs for errors by running `grep -R "Error" logs/chapter5`. Then, run `/lfs/compile-temporary-tools.sh` as the user `lfs`, and check for errors with `grep -R "Error" logs/chapter6.
 
 ## Building the System
-Run `/lfs/compile-temporary-tools.sh` as the user `lfs`.
+Next, we set up the `chroot` environment by running `sudo ./setup-chroot $LFS`. This will install all packages in the LFS book up to the end of Chapter 7. Then, run `./backup-system.sh` to create a backup of the environment. This will save you from having to repeat chapters 1-7 in the event that any of the packages in Chapter 8 are installed incorrectly. I highly recommend saving the backup in cloud storage or on a separate external storage device.
+
+Then, we compile all of the core system software by running `sudo ./enter-chroot.sh $LFS` to re-enter the `chroot` environment and `/sources/lfs/chapte8/install-packages.sh`. This step will take a **long** time to run. Go run some errands or watch a movie or climb a mountain or something like that. Once it's finished, you should compare the build logs with those posted on the LFS book website. There will almost certainly be some errors and test failures, but most of them can be safely ignored.
 
 ## Building in Stages
 LFS is meant to be built in one session, but if you have to reboot the system, make sure to follow steps 4-8 from above. If you have already compiled packages and don't want to recompile them, you can comment out the relevant installation script by running `sed -e "s/^/#/" <chapternumber>/<package>.sh`.
