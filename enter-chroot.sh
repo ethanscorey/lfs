@@ -4,7 +4,7 @@ if [ "$LFS" == "" ]; then
     echo "LFS is not defined."
     exit 1
 fi
-chown -R root:root $LFS/{usr,lib,var,etc,bin,sbin,tools}
+chown -R root:root $LFS/{usr,lib,var,etc,bin,sbin}
 case $(uname -m) in
 	x86_64) chown -R root:root $LFS/lib64 ;;
 esac
@@ -27,9 +27,6 @@ fi
 if [ -h $LFS/dev/shm ]; then
 	mkdir -pv $LFS/$(readlink $LFS/dev/shm)
 fi
-chmod ugo+x inside-chroot.sh
-chmod ugo+x inside-chroot2.sh
-chmod ugo+x inside-chroot3.sh
 mkdir -pv $LFS/sources/lfs
 cp -rf . $LFS/sources/lfs
 chroot "$LFS" /usr/bin/env -i \

@@ -5,7 +5,7 @@ if ! echo $READELF_OUTPUT | grep "/lib64/ld-linux-x86-64.so.2"; then
     echo "Dynamic linker not found"
     exit 1
 fi
-START_FILES=$(grep -o '/usr.lib/*./crt[1in].*succeeded' dummy.log)
+START_FILES=$(grep -o '/usr/lib/.*/crt[1in].*succeeded' dummy.log)
 for file in "crt1.o" "crti.o" "crtn.o"; do
     if ! echo $START_FILES | grep "/usr/lib/gcc/.*$file succeeded"; then
         echo "$file not found"
@@ -39,7 +39,7 @@ if ! echo $LIBC | grep "attempt to open /usr/lib/libc.so.6 succeeded"; then
     echo "libc failed"
     exit 1
 fi
-$DYNAMIC_LINKER=$(grep found dummy.log)
+DYNAMIC_LINKER=$(grep "found" dummy.log)
 if ! echo $DYNAMIC_LINKER | grep "found ld-linux-.*so\.2 at /usr/lib/ld-linux-.*so.2"; then
     echo "dynamic linker not found"
     exit 1
