@@ -1,10 +1,11 @@
 CHAPTER=$1
 PACKAGE=$2
 
-# Hard code file for libstdc++
+# Hard code file for libstdc++ and remove Tcl doc archive
 echo "libstdc++-12.2.0.tar.xz" | \
     cat - $LFS/sources/packages.csv \
     | cut -d\, -f1 \
+    | sed "s/tcl.*html.*//" \
     | grep "^$PACKAGE.*tar" \
     | grep -v "\.patch," \
     | while read line; do

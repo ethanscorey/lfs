@@ -1,6 +1,6 @@
 DIRNAME=$1
 pushd $DIRNAME
-VERSION=$(echo $DIRNAME | cut -d"-" -f2)
+VERSION=$(echo $DIRNAME | cut -d"-" -f1 | cut -c4-)
 tar -xf ../tcl$VERSION-html.tar.gz --strip-components=1
 SRCDIR=$(pwd)
 cd unix

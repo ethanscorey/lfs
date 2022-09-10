@@ -5,5 +5,5 @@ patch -Np1 -i ../zstd-$VERSION-upstream-fixes-1.patch
 make prefix=/usr
 make check
 make prefix=/usr install
-rm -v /usr/lib/libstd.a
+rm -v /usr/lib/libzstd.a
 popd
