@@ -8,7 +8,7 @@ fi
 echo "blacklist forte" > /etc/modprob.d/blacklist.conf
 bash /usr/lib/udev/init-net-rules.sh
 NAME=$(cat /etc/udev/rules.d/70-persistent-net.rules | grep SUBSYSTEM | sed -e 's/^.*NAME="//' -e 's/"//')
-IP=$(ip address | grep "inet 192" | sed -e "s/^.*inet *//" "s|/.*\$||")
+IP=$(ip address | grep "inet 192" | sed -e "s/^.*inet *//" -e "s|/.*\$||")
 cd /etc/sysconfig/
 cat > ifconfig.eth0 << "EOF"
 ONBOOT=yes
