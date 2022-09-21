@@ -1,6 +1,8 @@
 #!/bin/bash
 export LFS=$1
 export SCRIPT=$2
+shift
+shift
 if [ "$LFS" == "" ]; then
     echo "LFS is not defined."
     exit 1
@@ -36,7 +38,7 @@ sudo chroot "$LFS" /usr/bin/env -i \
 	TERM="$TERM" \
 	PS1='(lfs  chroot) \u:\w$ ' \
 	PATH=/usr/bin:/usr/sbin \
-	/bin/bash --login +h -c "/sources/lfs/$SCRIPT"
+	/bin/bash --login +h -c "/sources/lfs/$SCRIPT $@"
 sudo rm -rf $LFS/sources/lfs
 sudo chown -R lfs:lfs $LFS/{usr,lib,var,etc,bin,sbin}
 case $(uname -m) in
