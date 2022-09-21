@@ -9,7 +9,6 @@ echo "blacklist forte" > /etc/modprob.d/blacklist.conf
 bash /usr/lib/udev/init-net-rules.sh
 NAME=$(cat /etc/udev/rules.d/70-persistent-net.rules | grep SUBSYSTEM | sed -e 's/^.*NAME="//' -e 's/"//')
 IP=$(ip address | grep "inet 192" | sed -e "s/^.*inet *//" "s|/.*\$||")
-DNS=$(host -a google.com | grep from | sed -e "s/^.*from //" "s/#.*\$//")
 cd /etc/sysconfig/
 cat > ifconfig.eth0 << "EOF"
 ONBOOT=yes
@@ -23,7 +22,6 @@ EOF
 cat > /etc/resolv.conf << "EOF"
 # Begin /etc/resolv.conf
 
-nameserver $DNS
 nameserver 8.8.8.8
 
 # End /etc/resolve.conf
