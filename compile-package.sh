@@ -1,5 +1,6 @@
 CHAPTER=$1
 PACKAGE=$2
+KEEP=$3
 
 # Hard code file for libstdc++ and remove Tcl doc archive
 echo "libstdc++-12.2.0.tar.xz" | \
@@ -31,5 +32,7 @@ echo "libstdc++-12.2.0.tar.xz" | \
         exit 1
     fi
     echo "Done compiling $PACKAGE"
-    rm -rf $DIRNAME
+    if ! [ "$KEEP" == "KEEP" ]; then
+        rm -rf $DIRNAME
+    fi
 done
