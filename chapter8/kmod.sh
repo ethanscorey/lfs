@@ -6,7 +6,7 @@ pushd $DIRNAME
     --with-openssl \
     --with-xz \
     --with-zstd \
-    --with zlib
+    --with-zlib
 make
 make install
 for target in depmod insmod modinfo modprobe rmmod; do
