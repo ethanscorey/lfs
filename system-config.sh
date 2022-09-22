@@ -10,16 +10,17 @@ bash /usr/lib/udev/init-net-rules.sh
 NAME=$(cat /etc/udev/rules.d/70-persistent-net.rules | grep SUBSYSTEM | sed -e 's/^.*NAME="//' -e 's/"//')
 IP=$(ip address | grep "inet 192" | sed -e "s/^.*inet *//" -e "s|/.*\$||")
 cd /etc/sysconfig/
-cat > ifconfig.eth0 << "EOF"
+cat > ifconfig.$NAME << "EOF"
 ONBOOT=yes
-IFACE=eth0
+IFACE=$NAME
 SERVICE=ipv4-static
 IP=$IP
 GATEWAY=192.168.1.1
 PREFIX=24
 BROADCAST=192.168.1.255
 EOF
-sed "s/\$IP/$IP/" -i ifconfig.eth0
+sed "s|\$NAME|$NAME|" -i ifconfig.$NAME
+sed "s/\$IP/$IP/" -i ifconfig.$NAME
 cat > /etc/resolv.conf << "EOF"
 # Begin /etc/resolv.conf
 
