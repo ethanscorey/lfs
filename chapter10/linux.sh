@@ -2,7 +2,7 @@ DIRNAME=$1
 pushd $DIRNAME
 VERSION=$(echo $DIRNAME | cut -d"-" -f2)
 make mrproper
-make defconfig
+make menuconfig
 make
 make modules_install
 cp -iv arch/x86/boot/bzImage /boot/vmlinuz-$VERSION-lfs-11.2
