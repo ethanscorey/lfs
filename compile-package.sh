@@ -26,8 +26,8 @@ echo "libstdc++-12.2.0.tar.xz" | \
     fi
     echo "Compiling $PACKAGE"
     sleep 5
-    mkdir -pv "./logs/chapter$CHAPTER"
-    if ! source "./chapter$CHAPTER/$PACKAGE.sh" $DIRNAME 2>&1 | tee "./logs/chapter$CHAPTER/$PACKAGE.log"; then
+    mkdir -pv "$LFS/logs/chapter$CHAPTER"
+    if ! source "./chapter$CHAPTER/$PACKAGE.sh" $DIRNAME 2>&1 | tee "$LFS/logs/chapter$CHAPTER/$PACKAGE.log"; then
         echo "Compiling $PACKAGE FAILED."
         exit 1
     fi
