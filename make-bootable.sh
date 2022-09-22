@@ -8,14 +8,14 @@ cat > /etc/fstab << "EOF"
 # file system          mount-point  type     options             dump  fsck
 #                                                                      order
 
-$LFS_DISKp3            ext4     defaults            1     1
-$LFS_DISKp2            swap     pri=1               0     0
-$LFS_DISKp4            ext4     default             0     0
-proc                   proc     nosuid,noexec,nodev 0     0
-sysfs                  sysfs    nosuid,noexec,nodev 0     0
-devpts                 devpts   gid=5,mode=620      0     0
-tmpfs                  tmpfs    defaults            0     0
-devtmpfs               devtmpfs mode=0755,nosuid    0     0
+$LFS_DISKp3            /            ext4     defaults            1     1
+$LFS_DISKp2            swap         swap     pri=1               0     0
+$LFS_DISKp4            /home        ext4     default             0     0
+proc                   /proc        proc     nosuid,noexec,nodev 0     0
+sysfs                  /sys         sysfs    nosuid,noexec,nodev 0     0
+devpts                 /dev/pts     devpts   gid=5,mode=620      0     0
+tmpfs                  /run         tmpfs    defaults            0     0
+devtmpfs               /dev         devtmpfs mode=0755,nosuid    0     0
 
 # End /etc/fstab
 EOF
@@ -28,7 +28,7 @@ set default=0
 set timeout=5
 
 insmod ext2
-set root=(hd0,2)
+set root=(hd0,gpt3)
 
 menuentry "GNU/Linux, Linux $VERSION-lfs-11.2" {
         linux   /boot/vmlinuz-$VERSION-lfs-11.2 root=$LFS_DISKp3 ro
