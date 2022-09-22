@@ -19,6 +19,7 @@ GATEWAY=192.168.1.1
 PREFIX=24
 BROADCAST=192.168.1.255
 EOF
+sed "s/\$IP/$IP/" -i ifconfig.eth0
 cat > /etc/resolv.conf << "EOF"
 # Begin /etc/resolv.conf
 

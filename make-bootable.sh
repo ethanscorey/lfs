@@ -5,20 +5,21 @@ VERSION=$(ls /sources/linux*.tar.xz | sed "s/\.tar\.xz//" | cut -d"-" -f2)
 cat > /etc/fstab << "EOF"
 # Begin /etc/fstab
 
-# file system                mount-point  type     options             dump  fsck
-#                                                                            order
+# file system          mount-point  type     options             dump  fsck
+#                                                                      order
 
-/dev/$(echo $LFS_DISK)p3     /            ext4     defaults            1     1
-/dev/$(echo $LFS_DISK)p2     swap         swap     pri=1               0     0
-/dev/$(echo $LFS_DISK)p4     /home        ext4     default             0     0
-proc                         /proc        proc     nosuid,noexec,nodev 0     0
-sysfs                        /sys         sysfs    nosuid,noexec,nodev 0     0
-devpts                       /dev/pts     devpts   gid=5,mode=620      0     0
-tmpfs                        /run         tmpfs    defaults            0     0
-devtmpfs                     /dev         devtmpfs mode=0755,nosuid    0     0
+/dev/$LFS_DISKp3       ext4     defaults            1     1
+/dev/$LFS_DISKp2       swap     pri=1               0     0
+/dev/$LFS_DISKp4       ext4     default             0     0
+proc                   proc     nosuid,noexec,nodev 0     0
+sysfs                  sysfs    nosuid,noexec,nodev 0     0
+devpts                 devpts   gid=5,mode=620      0     0
+tmpfs                  tmpfs    defaults            0     0
+devtmpfs               devtmpfs mode=0755,nosuid    0     0
 
 # End /etc/fstab
 EOF
+sed "s|\$LFS_DISK|$LFS_DISK|" -i /etc/fstab
 source /sources/lfs/compile-package.sh 10 linux
 grub-install --target i386-pc $LFS_DISK
 cat > /boot/grub/grub.cfg << "EOF"
@@ -30,9 +31,11 @@ insmod ext2
 set root=(hd0,2)
 
 menuentry "GNU/Linux, Linux $VERSION-lfs-11.2" {
-        linux   /boot/vmlinuz-$VERSION-lfs-11.2 root=$(echo $LFS_DISK)p3 ro
+        linux   /boot/vmlinuz-$VERSION-lfs-11.2 root=$LFS_DISKp3 ro
 }
 EOF
+sed "s|\$LFS_DISK|$LFS_DISK|" -i /boot/grub/grub.cfg
+sed "s|\$VERSION|$VERSION|" -i /boot/grub/grub.cfg
 echo 11.2 > /etc/lfs-release
 cat > /etc/lsb-release << "EOF"
 DISTRIB_ID="Linux From Scratch"
