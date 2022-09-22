@@ -10,7 +10,7 @@ cat > /etc/fstab << "EOF"
 
 $LFS_DISKp3            /            ext4     defaults            1     1
 $LFS_DISKp2            swap         swap     pri=1               0     0
-$LFS_DISKp4            /home        ext4     default             0     0
+$LFS_DISKp4            /home        ext4     defaults            0     0
 proc                   /proc        proc     nosuid,noexec,nodev 0     0
 sysfs                  /sys         sysfs    nosuid,noexec,nodev 0     0
 devpts                 /dev/pts     devpts   gid=5,mode=620      0     0
