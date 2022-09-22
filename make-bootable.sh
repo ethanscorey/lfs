@@ -8,9 +8,9 @@ cat > /etc/fstab << "EOF"
 # file system          mount-point  type     options             dump  fsck
 #                                                                      order
 
-/dev/$LFS_DISKp3       ext4     defaults            1     1
-/dev/$LFS_DISKp2       swap     pri=1               0     0
-/dev/$LFS_DISKp4       ext4     default             0     0
+$LFS_DISKp3            ext4     defaults            1     1
+$LFS_DISKp2            swap     pri=1               0     0
+$LFS_DISKp4            ext4     default             0     0
 proc                   proc     nosuid,noexec,nodev 0     0
 sysfs                  sysfs    nosuid,noexec,nodev 0     0
 devpts                 devpts   gid=5,mode=620      0     0
