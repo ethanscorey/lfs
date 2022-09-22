@@ -20,7 +20,7 @@ devtmpfs                     /dev         devtmpfs mode=0755,nosuid    0     0
 # End /etc/fstab
 EOF
 source /sources/lfs/compile-package.sh 10 linux
-grub-install --target i386-pc /dev/$LFS_DISK
+grub-install --target i386-pc $LFS_DISK
 cat > /boot/grub/grub.cfg << "EOF"
 # Begin /boot/grub/grub.cfg
 set default=0
