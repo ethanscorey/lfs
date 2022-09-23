@@ -5,6 +5,8 @@ Inspired by [this series](https://www.youtube.com/watch?v=IXA0GNTLf_Q), I've wri
 
 Additionally, because LFS is meant to be customizable, there are a lot of decision points where I made a choice based on my own needs/goals. You may wish to make a different decision, so I'd highly recommend working with the [LFS book](https://www.linuxfromscratch.org/lfs/view/stable/index.html) to figure out where you would like to choose an alternative route and change the scripts accordingly.
 
+In fact, you will probably be better off using this repository as a _guide_ for creating your own automated LFS scripts rather than running it and waiting for it to give you an error. You may also wish to incorporate some of the packages included in Beyond Linux From Scratch into your build. In my experience, installing enough BLFS packages while still in the chroot environment on the host system is much easier than booting up your LFS build and wondering how to download packages without `wget`.
+
 ## Setup
 Because I'm building on a bootable USB, every time I power off the computer, I have to set up Ubuntu anew, which means reinstalling any packages needed to complete the rest of the build. This repository includes a script (`install-development-packages.sh`) to do just that. It also includes some packages used only for developing this repo, such as `vim` and the GitHub CLI. I'd recommend installing all of the packages (although you can adjust your `~/.vimrc` file to fit your preferences) so that you can make your own repo to reflect your customizations. To that end, you should set up your build environment with the following steps:
   1. Obtain a USB stick with adequate storage. I bought a 32GB Sandisk, but you can probably make do with less, as Alpine has a pretty small profile, and you'll be installing packages into RAM.
@@ -19,12 +21,15 @@ Because I'm building on a bootable USB, every time I power off the computer, I h
 At this point, you should be logged in as the `lfs` user (confirm that you see `lfs` in your bash prompt), and the target system should be mounted. You can confirm this by runnnning `sudo fdisk -l`. You should also confirm that `$LFS` and `$LFS_TGT` have been set to the correct values by running `echo $LFS $LFS_TGT`. 
 
 ## Building the Cross-Compilation Toolchain
-First, run `./compile-cross-toolchain.sh` as the user `lfs`. You can check the logs for errors by running `grep -R "Error" logs/chapter5`. Then, run `/lfs/compile-temporary-tools.sh` as the user `lfs`, and check for errors with `grep -R "Error" logs/chapter6.
+First, run `./compile-cross-toolchain.sh` as the user `lfs`. You can check the logs for errors by running `grep -R "Error|error:" logs/chapter5`. Then, run `/lfs/compile-temporary-tools.sh` as the user `lfs`, and check for errors with `grep -R "Error|error:" logs/chapter6.
 
 ## Building the System
 Next, we set up the `chroot` environment by running `sudo ./setup-chroot $LFS`. This will install all packages in the LFS book up to the end of Chapter 7. Then, run `./backup-system.sh` to create a backup of the environment. This will save you from having to repeat chapters 1-7 in the event that any of the packages in Chapter 8 are installed incorrectly. I highly recommend saving the backup in cloud storage or on a separate external storage device.
 
-Then, we compile all of the core system software by running `sudo ./enter-chroot.sh $LFS` to re-enter the `chroot` environment and `/sources/lfs/chapte8/install-packages.sh`. This step will take a **long** time to run. Go run some errands or watch a movie or climb a mountain or something like that. Once it's finished, you should compare the build logs with those posted on the LFS book website. There will almost certainly be some errors and test failures, but most of them can be safely ignored.
+Then, we compile all of the core system software by running `./run-in-chroot.sh $LFS chapter8/install-packages.sh`. This step will take a **long** time to run. Go run some errands or watch a movie or climb a mountain or something like that. Once it's finished, you should compare the build logs with those posted on the LFS book website. There will almost certainly be some errors and test failures, but most of them can be safely ignored. Once it's finished, make sure to check the logs for errors/test failures. Some test failures are expected, so compare your results with the build logs on the LFS site to check whether your logs look similar. Then, clean up from the installation process by running `./run-in-chroot.sh $LFS installation-cleanup.sh`. **Make sure you do not run `installation-cleanup.sh` outside of the chroot environment, or your host system may be unusable.**
+
+## Configuring the System and Making it Bootable
+Run `./run-in-chroot.sh $LFS system-config.sh` to configure your system. Then, run `./run-in-chroot.sh $LFS make-bootable.sh <PATH_TO_LFS_DISK>`.
 
 ## Building in Stages
-LFS is meant to be built in one session, but if you have to reboot the system, make sure to follow steps 4-8 from above. If you have already compiled packages and don't want to recompile them, you can comment out the relevant installation script by running `sed -e "s/^/#/" <chapternumber>/<package>.sh`.
+LFS is meant to be built in one session, but if you have to reboot the system, make sure to follow steps 4-8 in the setup instructions above. If you have already compiled packages and don't want to recompile them, you can comment out the relevant installation script by running `sed -e "s/^/#/" <chapternumber>/<package>.sh`.
