@@ -43,7 +43,7 @@ for package in \
     gdbm \
     gperf \
     expat \
-    inet-utils \
+    inetutils \
     less \
     perl \
     XML-Parser \
